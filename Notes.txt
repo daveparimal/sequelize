@@ -1,0 +1,41 @@
+1) Install sequelize
+npm install --save sequelize
+
+2) Install sequalize-cli 
+Commnd line tool. Helps create models and stuff
+npm install -g --save-dev sequelize-cli
+
+3) Create basic folder structure for backend with below command
+sequelize init
+
+4) Understanding folder structure
+/config/config.json --> Json containing username, password, database name, database type like mysql, postgres, etc.
+/models/index.js
+Helps connect to database and provides and object to communicate
+
+5) Useful commands for sequelize
+To create database:
+sequelize db:create 
+This will create database with the details available in config.json
+
+To create model:
+E.g.:
+sequelize model:generate --name User --attributes name:string,email:string,role:string
+sequelize model:generate --name <table_name> --attributes <column_name>:<column_type>,<column_name>:<column_type>, ....
+
+To delete database:
+sequalize db:drop
+
+To start migrations
+sequelize db:migrate
+This command will create a table in database called SequelizeMeta which keeps tracks of your migrations
+
+To see status of migrations
+sequelize db:migrate:status
+
+To revert previous migration. One migration only.
+sequelize db:migrate:undo
+
+To revert all previous migrations. 
+sequelize db:migrate:undo:all
+
