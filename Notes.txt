@@ -39,3 +39,6 @@ sequelize db:migrate:undo
 To revert all previous migrations. 
 sequelize db:migrate:undo:all
 
+6) Start server
+nodemon app.js
+

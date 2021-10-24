@@ -80,6 +80,45 @@ app.get("/posts", async (req, res) => {
   }
 });
 
+// Delete User
+app.delete("/users/:uuid", async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+    // include will include all the posts the user is associated with
+    const user = await User.findOne({
+      where: { uuid },
+    });
+    await user.destroy();
+
+    return res.json({ message: "Used deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Something got wrong" });
+  }
+});
+
+// Update user
+app.put("/users/:uuid", async (req, res) => {
+  const uuid = req.params.uuid;
+  const { name, email, role } = req.body;
+  try {
+    // include will include all the posts the user is associated with
+    const user = await User.findOne({
+      where: { uuid },
+    });
+    user.name = name;
+    user.email = email;
+    user.role = email;
+
+    await user.save();
+
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Something got wrong" });
+  }
+});
+
 // creates listener for accepting requests
 app.listen({ port: 5000 }, async () => {
   console.log("Server up on http://localhosT:5000");
